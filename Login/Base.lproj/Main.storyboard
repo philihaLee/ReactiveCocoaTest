@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UYm-ki-N5V">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--RAC的使用-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yaK-R8-SqK">
+                                <rect key="frame" x="20" y="94" width="194" height="30"/>
+                                <state key="normal" title="1.RAC代替苹果原生处理机制"/>
+                                <connections>
+                                    <action selector="oneBasicUse:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UIC-K4-InJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAV-Ef-Dzl">
+                                <rect key="frame" x="20" y="194" width="105" height="30"/>
+                                <state key="normal" title="3.模拟登录界面"/>
+                                <connections>
+                                    <action selector="threeNetwork:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WbI-9r-6C7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UV0-1f-gvD">
+                                <rect key="frame" x="20" y="144" width="105" height="30"/>
+                                <state key="normal" title="2.模拟登录界面"/>
+                                <connections>
+                                    <action selector="twoLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sZ1-PH-L1e"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="PAV-Ef-Dzl" firstAttribute="top" secondItem="UV0-1f-gvD" secondAttribute="bottom" constant="20" id="9J2-xy-2mB"/>
+                            <constraint firstItem="PAV-Ef-Dzl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="B4h-xV-22e"/>
+                            <constraint firstItem="yaK-R8-SqK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="JyQ-Uq-lgb"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UV0-1f-gvD" secondAttribute="trailing" constant="20" symbolic="YES" id="Oqf-3h-4M5"/>
+                            <constraint firstItem="yaK-R8-SqK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="PHy-vb-sNy"/>
+                            <constraint firstItem="UV0-1f-gvD" firstAttribute="top" secondItem="yaK-R8-SqK" secondAttribute="bottom" constant="20" id="aII-KW-Lfl"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yaK-R8-SqK" secondAttribute="trailing" constant="20" symbolic="YES" id="eI7-cx-OFQ"/>
+                            <constraint firstItem="UV0-1f-gvD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="k1I-Ak-jQx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="RAC的使用" id="PKj-un-8To"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="372" y="56.221889055472268"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="m75-9Q-Hxc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UYm-ki-N5V" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fpI-Kv-Wo4">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="xOc-Cm-CwS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZTC-52-mWO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-543" y="70"/>
+        </scene>
+    </scenes>
+</document>
