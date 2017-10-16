@@ -10,6 +10,8 @@
 #import "RACBasicUseController.h"
 #import "LoginViewController.h"
 #import "RACNetworkData.h"
+#import "RACOtherViewController.h"
+#import "RACAdvanceViewController.h"
 
 @interface ViewController ()
 
@@ -33,7 +35,19 @@
     [self.navigationController pushViewController:networkVC animated:YES];
 }
 
+// 4.其他一些常见的信号类
+- (IBAction)fourOtherClass:(id)sender {
+    RACOtherViewController *otherVC = [RACOtherViewController new];
+    otherVC.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController pushViewController:otherVC animated:YES];
+}
 
+// 5.RAC的一些高级用法
+- (IBAction)fiveAdvanceUsage:(id)sender {
+    RACAdvanceViewController *advanceVC = [RACAdvanceViewController new];
+    advanceVC.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController pushViewController:advanceVC animated:YES];
+}
 
 
 

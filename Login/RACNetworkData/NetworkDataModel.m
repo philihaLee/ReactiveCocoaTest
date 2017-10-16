@@ -10,9 +10,4 @@
 
 @implementation NetworkDataModel
 
-- (NSString *)description {
-    NSArray *keys = @[@"Radar", @"SD", @"WD", @"WS"];
-    return [self dictionaryWithValuesForKeys:keys].description;
-}
-
 @end

@@ -13,6 +13,7 @@ static NSString * const MyButtonClickNotification = @"MyButtonClickNotification"
 
 @interface RACBasicUseController() <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, assign) NSInteger number;
+
 @end
 @implementation RACBasicUseController
 
@@ -105,14 +106,63 @@ static NSString * const MyButtonClickNotification = @"MyButtonClickNotification"
         NSLog(@"%@", x);
     }];
     
-    [RACObserve(self, self.number) subscribeNext:^(id  _Nullable x) {
-        NSLog(@"数字被改变了");
+    UIButton *numberButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [numberButton setTitle:@"0" forState:UIControlStateNormal];;
+    numberButton.titleLabel.font = [UIFont systemFontOfSize:30];
+    [self.view addSubview:numberButton];
+    
+    [numberButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(20);
+        make.top.offset(200);
+    }];
+    
+    [[numberButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        self.number++;
     }];;
+    
+    [RACObserve(self, self.number) subscribeNext:^(id  _Nullable x) {
+        [numberButton setTitle:[x description] forState:UIControlStateNormal];
+    }];
+    
+    [self rac_observeKeyPath:@"number" options:NSKeyValueObservingOptionNew observer:nil block:^(id value, NSDictionary *change, BOOL causedByDealloc, BOOL affectedOnlyLastComponent) {
+        NSLog(@"代替KVO第二种方式,数字改变了");
+    }];
+    
+    [[self rac_valuesForKeyPath:@"number" observer:nil] subscribeNext:^(id  _Nullable x) {
+        NSLog(@"代替KVO的第三种方式");
+    }];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    /// 由于KVO只能监听set方法的调用, 改变_number成员变量无效
-    self.number++;
+
+#pragma mark - 代替手势
+/// 5.代替手势
+- (void)demo5 {
+    UILabel *label = [UILabel new];
+    label.text = @"RAC代替手势";
+    label.font = [UIFont systemFontOfSize:30];
+    [self.view addSubview:label];
+    
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(20);
+        make.top.offset(280);
+    }];
+    label.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tap = [UITapGestureRecognizer new];
+    [[tap rac_gestureSignal] subscribeNext:^(__kindof UIGestureRecognizer * _Nullable x) {
+        [self.navigationController popViewControllerAnimated:YES];
+        NSLog(@"轻敲Label");
+    }];
+    [label addGestureRecognizer:tap];
+}
+
+
+#pragma mark - 监听方法是否调用
+/// 监听方法<可以代替代理, 个人不建议使用, 还是使用信号比较好>
+- (void)demo6 {
+    [[self rac_signalForSelector:@selector(didReceiveMemoryWarning)] subscribeNext:^(RACTuple * _Nullable x) {
+        NSLog(@"didReceiveMemoryWarning方法被调用了");
+    }];
 }
 
 
@@ -127,6 +177,8 @@ static NSString * const MyButtonClickNotification = @"MyButtonClickNotification"
     [self demo2];
     [self deme3];
     [self demo4];
+    [self demo5];
+    [self demo6];
 }
 
 @end

@@ -35,8 +35,10 @@
                 // 在这里发送数据
                 NSDictionary *dictionary = responseObject[@"weatherinfo"];
                 // 字典转模型
-                NetworkDataModel *model = [NetworkDataModel yy_modelWithDictionary:dictionary];
-                self.modelArray = @[model];
+                NSArray *arr = @[dictionary];
+                self.modelArray = [arr.rac_sequence map:^id _Nullable(id  _Nullable value) {
+                    return [NetworkDataModel yy_modelWithDictionary:value];
+                }].array;
                 
                 [subscriber sendNext:self.modelArray];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
