@@ -21,7 +21,8 @@
     
 //    [self demo1];
 //    [self demo2];
-    [self demo3];
+//    [self demo3];
+    [self demo4];
 }
 
 #pragma mark - liftSelector全部信号收到之后执行方法
@@ -148,11 +149,52 @@
 - (void)demo4 {
     RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         
-        return nil;
+        NSLog(@"这里打印神马东西啊❓ %@", input);
+        
+        return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+            
+            // 发送数据
+            [subscriber sendNext:@"执行命令产生了信号"];
+            
+            // 发送完成
+            [subscriber sendCompleted];
+            
+            return nil;
+        }];
     }];
     
+    
     // 执行
-    [command execute:@"呵呵"];
+//    RACSignal *signal = [command execute:@"呵呵"];
+    // TODO: - 第一种方式
+//    // 订阅
+//    [signal subscribeNext:^(id  _Nullable x) {
+//        // 之前发送的数据
+//        NSLog(@"%@", x);
+//    }];
+    
+    // TODO: - 第二种方式拿到数据 signalOfSignals
+//    [command.executionSignals subscribeNext:^(RACSignal *  _Nullable x) {
+//        [x subscribeNext:^(id  _Nullable x) {
+//            NSLog(@"%@", x);
+//        }];
+//    }];
+    
+    // TODO: - 第三种方法: 获取最新发送的信号(获取signalOfSignals)
+    [command.executionSignals.switchToLatest subscribeNext:^(id  _Nullable x) {
+        NSLog(@"%@", x);
+    }];
+    
+    [command execute:@"呵呵1"];
+    
+    // 监听事件有没有完成
+    [command.executing subscribeNext:^(NSNumber * _Nullable x) {
+        if (x.boolValue) {
+            NSLog(@"表示当前正在执行");
+        } else {
+            NSLog(@"没有执行或者执行完成");
+        }
+    }];
 }
 
 @end

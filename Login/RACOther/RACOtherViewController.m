@@ -25,7 +25,7 @@
 //    [self demo3];
 //    [self RACReplaySubject];
 //    [self demo4];
-    [self demo5];
+//    [self demo5];
 }
 
 #pragma mark - RACDisposable

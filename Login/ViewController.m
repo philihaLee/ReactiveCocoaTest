@@ -12,6 +12,7 @@
 #import "RACNetworkData.h"
 #import "RACOtherViewController.h"
 #import "RACAdvanceViewController.h"
+#import "RACOperationViewController.h"
 
 @interface ViewController ()
 
@@ -49,6 +50,13 @@
     [self.navigationController pushViewController:advanceVC animated:YES];
 }
 
+// 6.RAC的一些操作方法
+- (IBAction)sixOperationMethod:(id)sender {
+    
+    RACOperationViewController *operationVC = [RACOperationViewController new];
+    operationVC.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController pushViewController:operationVC animated:YES];
+}
 
 
 @end
